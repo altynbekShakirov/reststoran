@@ -1,9 +1,10 @@
+import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public  class Menu implements Restaran {
+public class Menu implements Restaran {
 
     public Menu(String name, int price, int volume, int time) {
         this.name = name;
@@ -16,8 +17,6 @@ public  class Menu implements Restaran {
     }
 
 
-
-
     private String name;
     private int price;
     private int volume;
@@ -25,10 +24,10 @@ public  class Menu implements Restaran {
 
     @Override
     public String toString() {
-        return   "\n"+name + '\n' +
-                "price: " + price +" ||"+
-                "kolom: " + volume +" ||"+
-                "ubakyt: "+ time +" ||\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        return "\n" + name + '\n' +
+                "price: " + price + " ||" +
+                "kolom: " + volume + " ||" +
+                "ubakyt: " + time + " ||\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     }
 
     public String getName() {
@@ -81,69 +80,75 @@ public  class Menu implements Restaran {
 
     @Override
     public void create(List<Menu> menu) {
-        Scanner scanner= new Scanner(System.in);
-        System.out.println("POISK PO IMENI BLUDY:");
-        String name = scanner.nextLine();
-        int i=0;
-        for (Menu m:menu) {
-            i++;
-            if (name.equalsIgnoreCase(m.getName())){
-                i--;
-                System.out.println(menu.get(i));
-                System.out.println("s vas: "+menu.get(i).getPrice());
-                double summa= scanner.nextDouble();
-                if (summa>m.getPrice()){
-                    double result=summa- menu.get(i).getPrice();
-                    System.out.println("sdacha : " +result);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("POISK PO IMENI BLUDY:");
+            String name = scanner.nextLine();
+            int i = 0;
+            for (Menu m : menu) {
+                i++;
+                if (name.equalsIgnoreCase(m.getName())) {
+                    i--;
+                    System.out.println(menu.get(i));
+                    System.out.println("s vas: " + menu.get(i).getPrice());
+                    double summa = scanner.nextDouble();
+                    if (summa > m.getPrice()) {
+                        double result = summa - menu.get(i).getPrice();
+                        System.out.println("sdacha : " + result);
+                        throw new RuntimeException();
+                    }
+
                 }
+
+
             }
 
-
-
-        }
 
     }
 
     @Override
     public void remove(List<Menu> menu) {
 
-           Scanner scanner= new Scanner(System.in);
-           System.out.println("Syr sozdu jazynyz");
-           try {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Syr sozdu jazynyz");
+        try {
 
 
+            int kode = scanner.nextInt();
+            if (kode == 8822) {
+                System.out.println("""
+                                              
+                                              
+                                              
+                                              /////
+                                           /////
+                        ///            /////
+                         ///       /////
+                          ///   ////
+                           ////
+                           
+                           
+                          
+                           """);
+                System.out.println("tamaktyn atyn jazynyz oshol tamakty menudam alabyz!! ");
+                String object = scanner.next();
 
-
-        int kode= scanner.nextInt();
-        if (kode==8822) {
-            System.out.println("""
-                                          
-                                          
-                                          
-                                          /////
-                                       /////
-                    ///            /////
-                     ///       /////
-                      ///   ////
-                       ////
-                       
-                       
-                      
-                       """);
-            System.out.println("tamaktyn atyn jazynyz oshol tamakty menudam alabyz!! ");
-            String object = scanner.next();
-            for (Menu menu1 : menu) {
-                if (menu1.getName().equalsIgnoreCase(object)){
-                    boolean isRemoved = menu.remove(menu1);
-                    System.out.println(isRemoved ? "Food is removed" : "Remove failed");
-                    throw new Exception();
+                for (Menu menu1 : menu) {
+                    if (menu1.getName().equalsIgnoreCase(object)) {
+                        boolean isRemoved = menu.remove(menu1);
+                        System.out.println(isRemoved ? "Food is removed" : "Remove failed");
+                        throw new Exception();
+                    }
                 }
+                throw new RuntimeException();
             }
-            }}catch (Exception e){
-               System.err.println("Food is removed");
-           }
+        } catch (RuntimeException e) {
+            System.err.println("San Jazynyz (ERROR)");
+
+        } catch (Exception e) {
+            System.out.println("Food is removed");
         }
 
+    }
 
 
     @Override
@@ -154,17 +159,22 @@ public  class Menu implements Restaran {
 
     @Override
     public void sortByPrice(List<Menu> menu) {
-        Scanner scanner= new Scanner(System.in);
-        System.out.println("1 : Arzan tamktar \n" +
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("1 : Arzan tamktar \n" +
                     "2 : Kymbat tamaktar");
-        switch (scanner.nextInt()){
-            case 1:
-                menu.sort(menuComparator);
-                System.out.println(menu);
-            break;
-            case 2:
-                menu.sort(menuComparatorReverse);
-                System.out.println(menu);
+            switch (scanner.nextInt()) {
+                case 1:
+                    menu.sort(menuComparator);
+                    System.out.println(menu);
+                    break;
+                case 2:
+                    menu.sort(menuComparatorReverse);
+                    System.out.println(menu);
+                    throw new RuntimeException();
+            }
+        }catch (RuntimeException e){
+            System.err.println(" 1 je 2 ni jazynyz ! ! !");
         }
 
 
@@ -173,48 +183,47 @@ public  class Menu implements Restaran {
     @Override
     public void getByName(List<Menu> menu) {
 
-        try{
+        try {
 
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("SYR SOZDU JAZYNYZ");
-            int kode= scanner.nextInt();
-            if(kode==8822){
+            int kode = scanner.nextInt();
+            if (kode == 8822) {
 
                 System.out.println("""
-                                          
-                                          
-                                          
-                                          /////
-                                       /////
-                    ///            /////
-                     ///       /////
-                      ///   ////
-                       ////
-                       
-                       
-                      
-                       """);
+                                              
+                                              
+                                              
+                                              /////
+                                           /////
+                        ///            /////
+                         ///       /////
+                          ///   ////
+                           ////
+                           
+                           
+                          
+                           """);
 
                 System.out.print("Tamak aty: ");
                 String foodName = scanner.next();
                 System.out.print("salmagy: ");
                 int weight = scanner.nextInt();
                 System.out.print("akchsy: ");
-                int  price = scanner.nextInt();
+                int price = scanner.nextInt();
                 System.out.print("jasalyp bolushu(ubaktysy): ");
-                int  timeForPreparing = scanner.nextInt();
+                int timeForPreparing = scanner.nextInt();
                 List<Menu> food = new ArrayList<>();
-                food.add( new Menu(foodName,weight,price,timeForPreparing));
+                food.add(new Menu(foodName, weight, price, timeForPreparing));
                 menu.addAll(food);
 
-            }else {
+            } else {
                 throw new Exception("San jazynyz!");
             }
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("""
                        
                        
@@ -233,16 +242,17 @@ public  class Menu implements Restaran {
 
 
     }
-    public Comparator<Menu>menuComparator= new Comparator<Menu>() {
+
+    public Comparator<Menu> menuComparator = new Comparator<Menu>() {
         @Override
         public int compare(Menu o1, Menu o2) {
-            return o1.getPrice()-o2.getPrice();
+            return o1.getPrice() - o2.getPrice();
         }
     };
-    public Comparator<Menu>menuComparatorReverse= new Comparator<Menu>() {
+    public Comparator<Menu> menuComparatorReverse = new Comparator<Menu>() {
         @Override
         public int compare(Menu o1, Menu o2) {
-            return o2.getPrice()-o1.getPrice();
+            return o2.getPrice() - o1.getPrice();
         }
     };
 }
