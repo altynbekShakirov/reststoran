@@ -1,6 +1,6 @@
 public class Desert  extends Menu{
-    public Desert(String name, int price, int kolom, int  ubakyt) {
-        super(name, price, kolom, ubakyt);
+    public Desert(String name, int price, int volume, int  time) {
+        super(name, price, volume, time);
     }
 
     public Desert() {

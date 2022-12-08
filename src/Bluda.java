@@ -2,7 +2,7 @@ public class Bluda  extends Menu{
     public Bluda() {
     }
 
-    public Bluda(String name, int price, int kolom, int  ubakyt) {
-        super(name, price, kolom, ubakyt);
+    public Bluda(String name, int price, int volume, int  time) {
+        super(name, price, volume, time);
     }
 }

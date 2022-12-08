@@ -1,7 +1,3 @@
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -9,11 +5,11 @@ import java.util.Scanner;
 
 public  class Menu implements Restaran {
 
-    public Menu(String name, int price, int kolom, int ubakyt) {
+    public Menu(String name, int price, int volume, int time) {
         this.name = name;
         this.price = price;
-        this.kolom = kolom;
-        this.ubakyt = ubakyt;
+        this.volume = volume;
+        this.time = time;
     }
 
     public Menu() {
@@ -24,15 +20,15 @@ public  class Menu implements Restaran {
 
     private String name;
     private int price;
-    private int kolom;
-    private int  ubakyt;
+    private int volume;
+    private int time;
 
     @Override
     public String toString() {
         return   "\n"+name + '\n' +
                 "price: " + price +" ||"+
-                "kolom: " + kolom +" ||"+
-                "ubakyt: "+ubakyt+" ||\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+                "kolom: " + volume +" ||"+
+                "ubakyt: "+ time +" ||\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     }
 
     public String getName() {
@@ -51,20 +47,20 @@ public  class Menu implements Restaran {
         this.price = price;
     }
 
-    public int getKolom() {
-        return kolom;
+    public int getVolume() {
+        return volume;
     }
 
-    public void setKolom(int kolom) {
-        this.kolom = kolom;
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 
-    public int getUbakyt() {
-        return ubakyt;
+    public int getTime() {
+        return time;
     }
 
-    public void setUbakyt(int ubakyt) {
-        this.ubakyt = ubakyt;
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public Comparator<Menu> getMenuComparator() {
@@ -111,10 +107,48 @@ public  class Menu implements Restaran {
     @Override
     public void remove(List<Menu> menu) {
 
-    }
+           Scanner scanner= new Scanner(System.in);
+           System.out.println("Syr sozdu jazynyz");
+           try {
+
+
+
+
+        int kode= scanner.nextInt();
+        if (kode==8822) {
+            System.out.println("""
+                                          
+                                          
+                                          
+                                          /////
+                                       /////
+                    ///            /////
+                     ///       /////
+                      ///   ////
+                       ////
+                       
+                       
+                      
+                       """);
+            System.out.println("tamaktyn atyn jazynyz oshol tamakty menudam alabyz!! ");
+            String object = scanner.next();
+            for (Menu menu1 : menu) {
+                if (menu1.getName().equalsIgnoreCase(object)){
+                    boolean isRemoved = menu.remove(menu1);
+                    System.out.println(isRemoved ? "Food is removed" : "Remove failed");
+                    throw new Exception();
+                }
+            }
+            }}catch (Exception e){
+               System.err.println("Food is removed");
+           }
+        }
+
+
 
     @Override
     public void getAll(List<Menu> menu) {
+        menu.forEach(System.out::println);
 
     }
 
@@ -139,11 +173,15 @@ public  class Menu implements Restaran {
     @Override
     public void getByName(List<Menu> menu) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("SYR SOZDU JAZYNYZ");
-        int kode= scanner.nextInt();
-        if(kode==8822){
-            System.out.println("""
+        try{
+
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("SYR SOZDU JAZYNYZ");
+            int kode= scanner.nextInt();
+            if(kode==8822){
+
+                System.out.println("""
                                           
                                           
                                           
@@ -157,18 +195,26 @@ public  class Menu implements Restaran {
                        
                       
                        """);
-        System.out.print("Tamak aty: ");
-        String foodName = scanner.next();
-        System.out.print("salmagy: ");
-        int weight = scanner.nextInt();
-        System.out.print("akchsy: ");
-        int  price = scanner.nextInt();
-        System.out.print("jasalyp bolushu(ubaktysy): ");
-        int  timeForPreparing = scanner.nextInt();
-        List<Menu> food = new ArrayList<>();
-           food.add( new Menu(foodName,weight,price,timeForPreparing));
-           menu.addAll(food);
-             }else {
+
+                System.out.print("Tamak aty: ");
+                String foodName = scanner.next();
+                System.out.print("salmagy: ");
+                int weight = scanner.nextInt();
+                System.out.print("akchsy: ");
+                int  price = scanner.nextInt();
+                System.out.print("jasalyp bolushu(ubaktysy): ");
+                int  timeForPreparing = scanner.nextInt();
+                List<Menu> food = new ArrayList<>();
+                food.add( new Menu(foodName,weight,price,timeForPreparing));
+                menu.addAll(food);
+
+            }else {
+                throw new Exception("San jazynyz!");
+            }
+
+
+
+        }catch (Exception e){
             System.err.println("""
                        
                        
@@ -184,6 +230,7 @@ public  class Menu implements Restaran {
                      ///              ///
                     """);
         }
+
 
     }
     public Comparator<Menu>menuComparator= new Comparator<Menu>() {
